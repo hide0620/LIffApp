@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import liff from "@line/liff";
-import { AppRoutes as Routes } from "./router"
+import Routes from "./router"
 import "./App.css";
 
 function App() {
-
   useEffect(() => {
     liff
       .init({

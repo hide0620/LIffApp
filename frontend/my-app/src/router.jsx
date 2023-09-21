@@ -1,15 +1,16 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-// import MyPage from './components/organisms/MyPage';
+import { Home } from './components/pages/Home';
 import { Login } from './components/pages/Login';
 
-export const AppRoutes = () => {
+const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/mypage" element={<MyPage />} /> */}
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
 };
+export default AppRoutes;
