@@ -71,6 +71,6 @@ group :test do
 
 end
 
-gem 'rack-cors'
+gem 'rack-cors', require: 'rack/cors'
 gem 'pry-rails'
 gem 'rest-client'
