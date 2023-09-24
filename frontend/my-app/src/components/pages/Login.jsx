@@ -10,11 +10,10 @@ export const Login = () => {
 
   useEffect(() => {
     liff.init({ liffId: import.meta.env.VITE_LIFF_ID })
-      .then(() => {
-        setIsLoggedIn(liff.isLoggedIn());
-        if (liff.isLoggedIn()) {
-          const accessToken = liff.getAccessToken();
-          console.log(accessToken);
+    .then(() => {
+      setIsLoggedIn(liff.isLoggedIn());
+      if (liff.isLoggedIn()) {
+        const accessToken = liff.getAccessToken();
           axios.post('http://localhost:3001/api/check_user', {
             access_token: accessToken
           })
@@ -49,4 +48,6 @@ export const Login = () => {
     </div>
   );
 };
+
+
 
