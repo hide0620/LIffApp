@@ -26,8 +26,6 @@ export const SideMenu = () => {
       <ul>
         <li><Link to="/reservation-apply">予約申込</Link></li>
         <li><button onClick={handleLogout}>ログアウト</button></li>
-        <li><Link to="/mypage">マイページ</Link></li>
-        <li><Link to="/reservation-history">予約履歴</Link></li>
       </ul>
     </div>
   );
