@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <% if admin_signed_in? %>
+      <nav>
+        <%= link_to "Admin Home", admin_root_path %>
+        <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+      </nav>
+    <% else %>
+      <nav>
+        <%= link_to "Admin Login", new_admin_session_path %>
+      </nav>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
