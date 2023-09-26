@@ -1,7 +1,7 @@
 <%= form_for [:admin, @reservation_schedule] do |f| %>
   <div>
     <%= f.label :date, "日付" %>
-    <%= f.date_field :date, value: params[:date] || @reservation_schedule.date %>
+    <%= f.date_field :date, value: params[:date] || @reservation_schedule.date, readonly: true %>
   </div>
   <div>
     <%= f.label :start_time, "予約開始時刻" %>
