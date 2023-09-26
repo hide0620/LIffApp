@@ -11,16 +11,19 @@ class ReservationSchedule < ApplicationRecord
     start_date = params[:date].to_date
     end_date = start_date + 1.year
 
-    (start_date..end_date).select { |date| date.wday == start_date.wday }.each do |date|
-      self.create!(
-        date: date,
-        start_time: params[:start_time],
-        end_time: params[:end_time],
-        recurring_flag: true,
-        reservation_deadline: params[:reservation_deadline]
-      )
+    self.transaction do
+      (start_date..end_date).select { |date| date.wday == start_date.wday }.each do |date|
+        self.create!(
+          date: date,
+          start_time: params[:start_time],
+          end_time: params[:end_time],
+          recurring_flag: true,
+          reservation_deadline: params[:reservation_deadline]
+        )
+      end
     end
   end
+
 
   private
 

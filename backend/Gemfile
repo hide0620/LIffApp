@@ -76,4 +76,6 @@ gem 'pry-rails'
 gem 'rest-client'
 gem 'devise'
 gem 'webpacker', '~> 5.0'
+gem 'simple_calendar'
+gem 'sassc-rails'
 

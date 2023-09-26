@@ -1,0 +1,31 @@
+<%= form_for [:admin, @reservation_schedule] do |f| %>
+  <div>
+    <%= f.label :date, "日付" %>
+    <%= f.date_field :date, value: params[:date] || @reservation_schedule.date %>
+  </div>
+  <div>
+    <%= f.label :start_time, "予約開始時刻" %>
+    <%= f.time_select :start_time %>
+  </div>
+  <div>
+    <%= f.label :end_time, "予約終了時刻" %>
+    <%= f.time_select :end_time %>
+  </div>
+  <div>
+    <%= f.label :recurring_flag, "毎週繰り返し" %>
+    <%= f.check_box :recurring_flag %>
+  </div>
+  <div>
+    <%= f.label :reservation_deadline, "予約締め切り時間" %>
+    <%= f.select :reservation_deadline, deadline_options_for_select %>
+  </div>
+  <%= f.submit "保存" %>
+<% end %>
+
+<%= link_to "カレンダーに戻る", admin_reservation_schedules_path, class: "btn btn-default" %>
+
+<% unless @reservation_schedule.new_record? %>
+  <%= button_to "この日の予約枠を削除", admin_reservation_schedule_path(@reservation_schedule), method: :delete, data: { confirm: "本当にこの日の予約枠を削除しますか？" } %>
+<% end %>
+
+

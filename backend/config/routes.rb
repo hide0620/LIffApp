@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
+    resources :reservation_schedules
   end
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
 

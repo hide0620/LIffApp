@@ -44,8 +44,9 @@
     <div id="sideMenu">
       <% if admin_signed_in? %>
         <nav>
-          <%= link_to "Admin Home", admin_root_path %>
+          <%= link_to "ホーム画面", admin_root_path %>
           <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+          <%= link_to '予約枠設定', admin_reservation_schedules_path %>
         </nav>
       <% else %>
         <nav>
