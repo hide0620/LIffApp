@@ -8,20 +8,55 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <style>
+      /* サイドメニューのスタイル */
+      #sideMenu {
+        width: 200px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #f4f4f4;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+      #content {
+        margin-left: 220px;
+        padding: 20px;
+      }
+      /* サイドメニュー内のナビゲーションのスタイル */
+      nav {
+        display: flex;
+        flex-direction: column;
+      }
+      nav a {
+        margin-bottom: 10px; /* この値はお好みで調整してください */
+        text-decoration: none;
+        color: #333; /* リンクの色を設定 */
+      }
+      nav a:hover {
+        text-decoration: underline; /* ホバー時のスタイル */
+      }
+    </style>
   </head>
 
   <body>
-    <% if admin_signed_in? %>
-      <nav>
-        <%= link_to "Admin Home", admin_root_path %>
-        <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
-      </nav>
-    <% else %>
-      <nav>
-        <%= link_to "Admin Login", new_admin_session_path %>
-      </nav>
-    <% end %>
+    <div id="sideMenu">
+      <% if admin_signed_in? %>
+        <nav>
+          <%= link_to "Admin Home", admin_root_path %>
+          <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+        </nav>
+      <% else %>
+        <nav>
+          <%= link_to "Admin Login", new_admin_session_path %>
+        </nav>
+      <% end %>
+    </div>
 
-    <%= yield %>
+    <div id="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
+
