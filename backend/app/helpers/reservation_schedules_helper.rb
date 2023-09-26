@@ -1,0 +1,2 @@
+module ReservationSchedulesHelper
+end
