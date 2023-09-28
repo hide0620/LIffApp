@@ -29,7 +29,7 @@
     <%= f.label :reservation_deadline, "予約締め切り：　開始時刻の" %>
     <%= f.select :reservation_deadline, deadline_options_for_select %>
   </div>
-  <%= f.submit "保存" %>
+  <%= f.submit @reservation_schedule.new_record? ? "新規予約枠設定" : "更新" %>
 <% end %>
 
 <%= link_to "カレンダーに戻る", admin_reservation_schedules_path, class: "btn btn-default" %>
