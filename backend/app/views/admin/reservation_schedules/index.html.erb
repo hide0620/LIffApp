@@ -1,4 +1,4 @@
-<%= month_calendar do |date| %>
+<%= month_calendar start_day: :sunday do |date| %>
   <% reservation_schedule = ReservationSchedule.find_by(date: date) %>
   <%= link_to date.day, edit_admin_reservation_schedule_path(date) %>
   <% if reservation_schedule %>
