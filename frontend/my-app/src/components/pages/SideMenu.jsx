@@ -24,7 +24,7 @@ export const SideMenu = () => {
     <div className="sideMenu">
       <h2>サイドメニュー</h2>
       <ul>
-        <li><Link to="/reservation-apply">予約申込</Link></li>
+        <li><Link to="/reservation">予約申込</Link></li>
         <li><button onClick={handleLogout}>ログアウト</button></li>
       </ul>
     </div>
