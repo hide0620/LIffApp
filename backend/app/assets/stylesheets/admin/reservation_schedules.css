@@ -1,0 +1,32 @@
+/* カレンダーのヘッダーのスタイル */
+.simple-calendar .calendar-heading {
+  background-color: #f5f5f5;
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+}
+
+/* 日付のセルのスタイル */
+.simple-calendar .day {
+  border: 1px solid #e0e0e0;
+  min-height: 100px;
+  text-align: center;
+  vertical-align: top;
+}
+
+/* 今日の日付のセルのスタイル */
+.simple-calendar .today {
+  background-color: #f5f5f5;
+}
+
+/* 日付のリンクのスタイル */
+.simple-calendar .day a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.simple-calendar .day a:hover {
+  background-color: #e0e0e0;
+}

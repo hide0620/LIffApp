@@ -14,7 +14,7 @@ export const Login = () => {
       setIsLoggedIn(liff.isLoggedIn());
       if (liff.isLoggedIn()) {
         const accessToken = liff.getAccessToken();
-          axios.post('http://localhost:3001/api/check_user', {
+          axios.post('http://localhost:3001/api/v1/check_user', {
             access_token: accessToken
           })
           .then(response => {

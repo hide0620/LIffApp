@@ -40,7 +40,7 @@ export const Register = () => {
       access_token: accessToken
     };
     console.log(data);
-    axios.post('http://localhost:3001/api/register', data)
+    axios.post('http://localhost:3001/api/v1/register', data)
       .then(response => {
         console.log('User registered:', response);
         navigate('/home');

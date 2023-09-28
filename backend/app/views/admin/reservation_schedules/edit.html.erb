@@ -1,0 +1,41 @@
+<%= form_for [:admin, @reservation_schedule] do |f| %>
+  <% if @reservation_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation_schedule.errors.count, "error") %> prohibited this reservation_schedule from being saved:</h2>
+      <ul>
+      <% @reservation_schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :date, "日付：" %>
+    <%= f.date_field :date, value: params[:date] || @reservation_schedule.date, readonly: true %>
+  </div>
+  <div>
+    <%= f.label :start_time, "予約開始時刻：" %>
+    <%= f.time_select :start_time, minute_step: 30 %>
+  </div>
+  <div>
+    <%= f.label :end_time, "予約終了時刻：" %>
+    <%= f.time_select :end_time, minute_step: 30 %>
+  </div>
+  <div>
+    <%= f.label :recurring_flag, "毎週繰り返し：" %>
+    <%= f.check_box :recurring_flag %>
+  </div>
+  <div>
+    <%= f.label :reservation_deadline, "予約締め切り：　開始時刻の" %>
+    <%= f.select :reservation_deadline, deadline_options_for_select %>
+  </div>
+  <%= f.submit @reservation_schedule.new_record? ? "新規予約枠設定" : "更新" %>
+<% end %>
+
+<%= link_to "カレンダーに戻る", admin_reservation_schedules_path, class: "btn btn-default" %>
+
+<% unless @reservation_schedule.new_record? %>
+  <%= button_to "この日の予約枠を削除", admin_reservation_schedule_path(@reservation_schedule), method: :delete, data: { confirm: "本当にこの日の予約枠を削除しますか？" } %>
+<% end %>
+
+
