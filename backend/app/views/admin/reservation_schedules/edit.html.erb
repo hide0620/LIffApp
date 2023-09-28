@@ -1,22 +1,32 @@
 <%= form_for [:admin, @reservation_schedule] do |f| %>
+  <% if @reservation_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation_schedule.errors.count, "error") %> prohibited this reservation_schedule from being saved:</h2>
+      <ul>
+      <% @reservation_schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
-    <%= f.label :date, "日付" %>
+    <%= f.label :date, "日付：" %>
     <%= f.date_field :date, value: params[:date] || @reservation_schedule.date, readonly: true %>
   </div>
   <div>
-    <%= f.label :start_time, "予約開始時刻" %>
-    <%= f.time_select :start_time %>
+    <%= f.label :start_time, "予約開始時刻：" %>
+    <%= f.time_select :start_time, minute_step: 30 %>
   </div>
   <div>
-    <%= f.label :end_time, "予約終了時刻" %>
-    <%= f.time_select :end_time %>
+    <%= f.label :end_time, "予約終了時刻：" %>
+    <%= f.time_select :end_time, minute_step: 30 %>
   </div>
   <div>
-    <%= f.label :recurring_flag, "毎週繰り返し" %>
+    <%= f.label :recurring_flag, "毎週繰り返し：" %>
     <%= f.check_box :recurring_flag %>
   </div>
   <div>
-    <%= f.label :reservation_deadline, "予約締め切り時間" %>
+    <%= f.label :reservation_deadline, "予約締め切り：　開始時刻の" %>
     <%= f.select :reservation_deadline, deadline_options_for_select %>
   </div>
   <%= f.submit "保存" %>

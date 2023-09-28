@@ -1,3 +1,9 @@
 <%= month_calendar do |date| %>
-  <%= link_to date.day, edit_admin_reservation_schedule_path(date) %> <!-- これで "26" のように日付だけが表示されます -->
+  <% reservation_schedule = ReservationSchedule.find_by(date: date) %>
+  <%= link_to date.day, edit_admin_reservation_schedule_path(date) %>
+  <% if reservation_schedule %>
+    <div>
+      <%= reservation_schedule.start_time.strftime('%H:%M') %> - <%= reservation_schedule.end_time.strftime('%H:%M') %>
+    </div>
+  <% end %>
 <% end %>

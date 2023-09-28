@@ -1,7 +1,7 @@
 class Admin::ReservationSchedulesController < ApplicationController
 
   def create
-    if params[:recurring_flag] == 'true'
+    if params[:reservation_schedule][:recurring_flag] == '1'
       ReservationSchedule.create_recurring_schedules(reservation_schedule_params)
     else
       ReservationSchedule.create!(reservation_schedule_params)
@@ -11,9 +11,7 @@ class Admin::ReservationSchedulesController < ApplicationController
   end
 
   def edit
-    # @reservation_schedule = ReservationSchedule.find_or_initialize_by(date: params[:date])
     @reservation_schedule = ReservationSchedule.find_or_initialize_by(date: params[:id])
-
   end
 
   def update
