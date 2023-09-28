@@ -15,11 +15,19 @@ class Admin::ReservationSchedulesController < ApplicationController
   end
 
   def update
-    @reservation_schedule = ReservationSchedule.find(params[:id])
-    if @reservation_schedule.update(reservation_schedule_params)
-      redirect_to admin_reservation_schedules_path, notice: '予約枠を更新しました。'
+    if params[:reservation_schedule][:recurring_flag] == '1'
+      if ReservationSchedule.update_recurring_schedules(reservation_schedule_params)
+        redirect_to admin_reservation_schedules_path, notice: '予約枠を一括更新しました。'
+      else
+        render :edit
+      end
     else
-      render :edit
+      @reservation_schedule = ReservationSchedule.find(params[:id])
+      if @reservation_schedule.update(reservation_schedule_params)
+        redirect_to admin_reservation_schedules_path, notice: '予約枠を更新しました。'
+      else
+        render :edit
+      end
     end
   end
 

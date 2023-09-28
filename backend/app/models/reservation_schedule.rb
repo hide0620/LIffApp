@@ -40,6 +40,23 @@ class ReservationSchedule < ApplicationRecord
     created_schedules.any?
   end
 
+  def self.update_recurring_schedules(params)
+    start_date = params[:date].to_date
+    end_date = start_date + 1.year
+
+    success = true
+    self.transaction do
+      (start_date..end_date).select { |date| date.wday == start_date.wday }.each do |date|
+        schedule = self.find_or_initialize_by(date: date)
+        unless schedule.update(params.except(:date))
+          success = false
+          raise ActiveRecord::Rollback
+        end
+      end
+    end
+
+    success
+  end
 
   private
 
