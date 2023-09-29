@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'check_user', to: 'user_auth#check_user'
       post 'register', to: 'users#create'
+      resources :reservation_schedules, only: [:index]
     end
   end
 end
