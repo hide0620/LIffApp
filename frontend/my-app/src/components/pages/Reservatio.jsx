@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import axios from 'axios'; // axiosをインポート
+import axios from 'axios';
 import 'moment/locale/ja';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { TimeSelect } from './TimeSelect';
@@ -14,12 +14,13 @@ export const Reservation = props => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
+  const [selectedStartTime, setSelectedStartTime] = useState(null);
+  const [selectedEndTime, setSelectedEndTime] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/v1/reservation_schedules')
       .then(response => {
         const fetchedEvents = response.data.map(event => {
-          // dateフィールドを使用して日付を取得
           const eventDate = moment(event.date);
           const startTime = moment(event.start_time).format('HH:mm');
           const endTime = moment(event.end_time).format('HH:mm');
@@ -42,14 +43,24 @@ export const Reservation = props => {
 
   const handleDateSelect = (slotInfo) => {
     const date = moment(slotInfo.start).format('YYYY-MM-DD');
-    setSelectedDate(date);
+    const selectedEvent = events.find(event => moment(event.start).isSame(slotInfo.start, 'day'));
+    if (selectedEvent) {
+      setSelectedDate(date);
+      setSelectedStartTime(moment(selectedEvent.start).format('HH:mm'));
+      setSelectedEndTime(moment(selectedEvent.end).format('HH:mm'));
+    }
   };
 
   return (
     <div>
       <h3>服薬指導の予約</h3>
       {selectedDate ? (
-        <TimeSelect selectedDate={selectedDate} onBack={handleBackToCalendar}  />
+        <TimeSelect
+        selectedDate={selectedDate}
+        onBack={handleBackToCalendar}
+        startTime={selectedStartTime}
+        endTime={selectedEndTime}
+        />
       ) : (
         <>
           <Calendar
