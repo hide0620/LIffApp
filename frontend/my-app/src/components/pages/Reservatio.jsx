@@ -6,6 +6,7 @@ import axios from 'axios';
 import 'moment/locale/ja';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { TimeSelect } from './TimeSelect';
+import { PaymentMethodSelect } from './PaymentMethodSelect';
 
 moment.locale('ja');
 const localizer = momentLocalizer(moment);
@@ -16,6 +17,7 @@ export const Reservation = props => {
   const [events, setEvents] = useState([]);
   const [selectedStartTime, setSelectedStartTime] = useState(null);
   const [selectedEndTime, setSelectedEndTime] = useState(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/v1/reservation_schedules')
@@ -51,16 +53,30 @@ export const Reservation = props => {
     }
   };
 
+  const handleTimeSlotSelect = (slot) => {
+    setSelectedTimeSlot(slot); // 選択された時間スロットをセット
+  };
+  const handlePaymentSelect = (method) => {
+    setPaymentMethod(method);
+    // ここで、次のステップに進むか、API呼び出しを使用して支払い情報を保存するなどの追加のロジックを実装できます。
+  };
+
   return (
     <div>
       <h3>服薬指導の予約</h3>
-      {selectedDate ? (
-        <TimeSelect
-        selectedDate={selectedDate}
-        onBack={handleBackToCalendar}
-        startTime={selectedStartTime}
-        endTime={selectedEndTime}
-        />
+      {selectedDate && !selectedTimeSlot  ? (
+          <TimeSelect
+            selectedDate={selectedDate}
+            onBack={handleBackToCalendar}
+            startTime={selectedStartTime}
+            endTime={selectedEndTime}
+            onTimeSlotSelect={handleTimeSlotSelect}
+          />
+        ) : selectedTimeSlot ? (
+          <PaymentMethodSelect onBack={() => setSelectedTimeSlot(null)}
+          onSelect={handlePaymentSelect}
+          selectedDateTime={`${selectedDate} ${selectedTimeSlot}`}
+          />
       ) : (
         <>
           <Calendar

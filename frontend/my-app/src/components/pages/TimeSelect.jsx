@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-export const TimeSelect = ({ selectedDate, onBack, startTime, endTime }) => {
+export const TimeSelect = ({ selectedDate, onBack, startTime, endTime, onTimeSlotSelect }) => {
   const generateTimeSlots = (start, end) => {
     const slots = [];
     const today = moment().format('YYYY-MM-DD');
@@ -27,7 +27,7 @@ export const TimeSelect = ({ selectedDate, onBack, startTime, endTime }) => {
       <ul style={{ padding: 0 }}>
         {timeSlots.map((slot, index) => (
           <li key={index} style={timeSlotStyle}>
-            <button>{slot}</button>
+            <button onClick={() => onTimeSlotSelect(slot)}>{slot}</button>
           </li>
         ))}
       </ul>
