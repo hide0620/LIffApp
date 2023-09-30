@@ -1,12 +1,10 @@
-/* PaymentMethodSelect.css */
-
 .payment-selection {
   border: 1px solid #e0e0e0;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px auto; /* 中央に配置 */
-  max-width: 400px;  /* 最大横幅を400pxに設定 */
+  margin: 20px auto;
+  max-width: 400px;
 }
 
 .payment-selection h4 {
@@ -41,9 +39,6 @@ button:disabled {
   background-color: #e0e0e0;
   cursor: not-allowed;
 }
-/* PaymentMethodSelect.css */
-
-/* ... 既存のスタイル ... */
 
 .input-group {
   display: flex;
@@ -54,10 +49,6 @@ button:disabled {
 .input-group label {
   margin-right: 10px;
 }
-
-/* PaymentMethodSelect.css */
-
-/* ... 既存のスタイル ... */
 
 .payment-selection > div {
   margin-bottom: 20px;
