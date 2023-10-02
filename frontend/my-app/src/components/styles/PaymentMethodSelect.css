@@ -57,3 +57,8 @@ button:disabled {
 .payment-selection button {
   margin-top: 20px;
 }
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

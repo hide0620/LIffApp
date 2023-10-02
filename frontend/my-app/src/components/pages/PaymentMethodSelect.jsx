@@ -6,6 +6,7 @@ export const PaymentMethodSelect = ({ onBack, onSelect, selectedDateTime }) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [securityCode, setSecurityCode] = useState('');
+  const [error, setError] = useState('');
 
   const handlePaymentOptionChange = (e) => {
     setPaymentOption(e.target.value);
@@ -13,7 +14,11 @@ export const PaymentMethodSelect = ({ onBack, onSelect, selectedDateTime }) => {
 
   const handleSubmit = () => {
     if (paymentOption === 'クレジットカード') {
-      // ここでクレジットカード情報のバリデーションを行うこともできます
+      if (!/^\d+$/.test(cardNumber) || !/^\d{2}\/\d{2}$/.test(expiryDate) || !/^\d+$/.test(securityCode)) {
+        setError('入力が正しくありません。クレジットカード番号、期限、セキュリティコードは半角数字のみを入力してください。期限はMM/YYの形式で入力してください。');
+        return;
+      }
+      setError('');
       onSelect({
         paymentOption,
         cardDetails: {
@@ -23,6 +28,7 @@ export const PaymentMethodSelect = ({ onBack, onSelect, selectedDateTime }) => {
         }
       });
     } else {
+      setError('');
       onSelect(paymentOption);
     }
   };
@@ -73,6 +79,7 @@ export const PaymentMethodSelect = ({ onBack, onSelect, selectedDateTime }) => {
                 className="inputField"
               />
             </div>
+            {error && <p className="error-message">{error}</p>}
           </div>
         )}
         <div>
