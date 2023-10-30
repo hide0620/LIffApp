@@ -4,6 +4,7 @@ import { Home } from './components/pages/Home';
 import { Login } from './components/pages/Login';
 import { Register } from './components/pages/Register';
 import { Reservation } from "./components/pages/Reservatio";
+import { PaymentMethodSelect } from "./components/pages/PaymentMethodSelect"
 
 const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reservation" element={<Reservation/>} />
+        <Route path="/payment" element={<PaymentMethodSelect/>} />
       </Routes>
     </BrowserRouter>
   );

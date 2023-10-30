@@ -9,6 +9,12 @@ export const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
     liff.init({ liffId: import.meta.env.VITE_LIFF_ID })
     .then(() => {
       setIsLoggedIn(liff.isLoggedIn());
@@ -22,6 +28,8 @@ export const Login = () => {
               navigate('/register'); // 新規ユーザー登録画面に遷移
             } else {
               navigate('/home'); // ホーム画面に遷移
+              const user_id = response.data.user_id
+              setCookie('user_id', user_id, 30);
             }
           })
           .catch(error => {

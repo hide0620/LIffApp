@@ -14,7 +14,7 @@ module Api
                 if user.nil?
                 render json: { is_new_user: true }
                 else
-                render json: { is_new_user: false }
+                render json: { is_new_user: false, user_id: user.id }
                 end
             end
 

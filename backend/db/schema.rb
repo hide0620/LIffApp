@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_26_062853) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_30_080114) do
   create_table "admins", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -23,12 +23,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_062853) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "creditcard", charset: "utf8mb3", force: :cascade do |t|
+    t.string "payjp_id"
+    t.integer "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reservation_schedules", charset: "utf8mb3", force: :cascade do |t|
     t.date "date"
     t.datetime "start_time"
     t.datetime "end_time"
     t.boolean "recurring_flag"
     t.integer "reservation_deadline"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reservations", charset: "utf8mb3", force: :cascade do |t|
+    t.date "date"
+    t.time "start_time"
+    t.time "start_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

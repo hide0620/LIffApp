@@ -1,3 +1,5 @@
+require 'payjp'
+
 class Admin::ReservationSchedulesController < ApplicationController
 
   def create
@@ -32,6 +34,16 @@ class Admin::ReservationSchedulesController < ApplicationController
   end
 
   def destroy
+    Payjp.api_key = 'sk_test_7f1d769ec5709713a860b835'
+    Payjp.open_timeout = 30 # optionally
+    Payjp.read_timeout = 90 # optionally
+    
+    # ex, create charge
+    charge = Payjp::Charge.create(
+      :amount => 999,
+      :card => 'tok_7ee563916ab1a1603957f91c8429',
+      :currency => 'jpy',
+    )
     @reservation_schedule = ReservationSchedule.find(params[:id])
     @reservation_schedule.destroy
     redirect_to admin_reservation_schedules_path, notice: '指定した日の予約枠を削除しました。'
