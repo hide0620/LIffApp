@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'check_user', to: 'user_auth#check_user'
       post 'register', to: 'users#create'
+      get 'create_creditcard', to: 'creditcards#create_creditcard' 
       resources :reservation_schedules, only: [:index]
     end
   end
